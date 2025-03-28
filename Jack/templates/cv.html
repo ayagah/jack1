@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ cv.name }} - CV</title>
+    <style>
+        /* General styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 30px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            transition: background 0.3s;
+        }
+
+        h1, h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+            background-color: #007bff;
+            color: #fff;
+            border-radius: 10px 10px 0 0;
+            position: relative;
+        }
+
+        .header h1 {
+            margin: 0;
+        }
+
+        .contact {
+            text-align: center;
+            margin: 10px 0;
+        }
+
+        .contact p {
+            margin: 5px 0;
+        }
+
+        .contact a {
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .contact a:hover {
+            text-decoration: underline;
+        }
+
+        .copy-btn {
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 14px;
+            margin-left: 5px;
+        }
+
+        .copy-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section h2 {
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+        }
+
+        .section p {
+            text-align: justify;
+            line-height: 1.6;
+        }
+
+        /* Dark Mode */
+        .dark-mode {
+            background-color: #222;
+            color: #ddd;
+        }
+
+        .dark-mode .container {
+            background-color: #333;
+        }
+
+        .dark-mode .header {
+            background-color: #0056b3;
+        }
+
+        .dark-mode a {
+            color: #0d6efd;
+        }
+
+        /* Dark Mode Toggle Button */
+        .dark-mode-toggle {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #fff;
+            color: #007bff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .dark-mode-toggle:hover {
+            background-color: #ddd;
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .container {
+                width: 90%;
+                margin: 20px auto;
+            }
+
+            .header {
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <h1>{{ cv.name }}</h1>
+            <p>Professional CV</p>
+            <button class="dark-mode-toggle" onclick="toggleDarkMode()">🌙</button>
+        </div>
+
+        <div class="contact">
+            <p>
+                <strong>Email:</strong> 
+                <a href="mailto:{{ cv.email }}" id="email">{{ cv.email }}</a>
+                <button class="copy-btn" onclick="copyEmail()">📋 Copy</button>
+            </p>
+            <p><strong>Phone:</strong> {{ cv.phone }}</p>
+        </div>
+
+        <div class="section">
+            <h2>Summary</h2>
+            <p>{{ cv.summary }}</p>
+        </div>
+
+        <div class="section">
+            <h2>Education</h2>
+            <p>{{ cv.education }}</p>
+        </div>
+
+        <div class="section">
+            <h2>Experience</h2>
+            <p>{{ cv.experience }}</p>
+        </div>
+
+        <div class="section">
+            <h2>Skills</h2>
+            <p>{{ cv.skills }}</p>
+        </div>
+    </div>
+
+    <script>
+        // Toggle Dark Mode
+        function toggleDarkMode() {
+            document.body.classList.toggle("dark-mode");
+            let mode = document.body.classList.contains("dark-mode") ? "dark" : "light";
+            localStorage.setItem("theme", mode);
+        }
+
+        // Load Theme from Local Storage
+        window.onload = function() {
+            if (localStorage.getItem("theme") === "dark") {
+                document.body.classList.add("dark-mode");
+            }
+        };
+
+        // Copy Email to Clipboard
+        function copyEmail() {
+            let emailText = document.getElementById("email").textContent;
+            navigator.clipboard.writeText(emailText).then(() => {
+                alert("Email copied to clipboard!");
+            });
+        }
+    </script>
+
+</body>
+</html>
